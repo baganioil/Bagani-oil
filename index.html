@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
     <meta name="description" content="Bagani Oil — Abangan. Ang langis ng tunay na bayani">
     <title>Bagani Oil — Abangan</title>
     <link rel="icon" type="image/png" href="assets/bagani-icon.png">
@@ -232,11 +233,43 @@
         .footer-line a:hover { color: var(--gold-bright); }
 
         /* ── Mobile ── */
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
             html, body { overflow: auto; }
-            .background-scene { object-position: 70% center; } /* Shift image slightly for better mobile focal point */
-            .abangan { font-size: clamp(2.8rem, 14vw, 5rem); }
-            .countdown { flex-wrap: wrap; }
+            .background-scene { object-position: 65% center; } /* Shift image slightly for better mobile focal point */
+            
+            .content { 
+                padding: 24px 20px; 
+                align-items: center; 
+                text-align: center; 
+            }
+            
+            .site-logo { margin: 0 auto; width: 140px; }
+            .hero-text { height: 40px !important; } /* Reduce spacer height on mobile */
+            
+            .bottom-area { 
+                align-items: center; 
+                width: 100%; 
+            }
+            p.countdown-eyebrow { text-align: center; }
+            
+            .countdown { 
+                flex-wrap: wrap; 
+                justify-content: center; 
+                gap: 12px; 
+            }
+            
+            .countdown-number { 
+                min-width: 64px; 
+                padding: 8px 0; 
+                font-size: 2.2rem; 
+            }
+
+            .countdown-sep {
+                margin-bottom: 22px; 
+                font-size: 2rem;
+            }
+
+            .footer-line { text-align: center; }
         }
     </style>
 </head>
