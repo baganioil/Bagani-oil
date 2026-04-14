@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bagani Oil — Abangan. Ang langis ng tunay na bayani">
+    <title>Bagani Oil — Abangan</title>
+    <link rel="icon" type="image/png" href="assets/bagani-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #b8a800;
+            --gold-bright: #d4c200;
+            --fire-red: #8b2000;
+            --fire-orange: #c84000;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Manrope', sans-serif;
+        }
+
+        /* ── Scene ── */
+        .scene {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background:
+                radial-gradient(ellipse 90% 55% at 50% 110%, #6b1a00 0%, #3a0c00 30%, transparent 65%),
+                radial-gradient(ellipse 60% 40% at 30% 115%, #8b2500 0%, transparent 55%),
+                #0a0804;
+            overflow: hidden;
+        }
+
+        /* ── Full Background image ── */
+        .background-scene {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Added static effects for a richer dramatic look */
+            filter: 
+                contrast(1.15) 
+                brightness(0.90) 
+                saturate(1.25);
+            z-index: 0; /* Fixed: moved above the scene background so it shows up */
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* ── Fire glow layer ── */
+        .fire-glow {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 45%;
+            background: radial-gradient(ellipse 100% 100% at 50% 100%,
+                rgba(220, 80, 0, 0.45) 0%,
+                rgba(120, 30, 0, 0.25) 40%,
+                transparent 75%);
+            pointer-events: none;
+            z-index: 1; /* Sits above the background-scene */
+            mix-blend-mode: color-dodge;
+            animation: flare 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes flare {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; transform: scaleY(1.1); }
+        }
+
+        /* ── Sparks (CSS animated particles) ── */
+        .sparks {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 2; /* Sits above the fire glow and background */
+        }
+        .spark {
+            position: absolute;
+            bottom: 0;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: #ff8c00;
+            opacity: 0;
+            animation: rise var(--dur) ease-in var(--delay) infinite;
+        }
+        .spark::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            background: #ffcc00;
+            top: -2px;
+            left: 0;
+        }
+        @keyframes rise {
+            0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0.9; }
+            60%  { opacity: 0.6; }
+            100% { transform: translateY(-55vh) translateX(var(--drift)) scale(0.2); opacity: 0; }
+        }
+
+        /* ── Removed manual warrior style previously here ── */
+        
+        /* ── Content layer ── */
+        .content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: clamp(24px, 4vw, 52px);
+            z-index: 10; /* Make sure content sits clearly above the background and sparks */
+        }
+
+        /* Top: logo */
+        .site-logo {
+            width: clamp(140px, 20vw, 220px);
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.7));
+        }
+
+        /* Middle: ABANGAN text */
+        .hero-text {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        .hero-copy {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .abangan {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(3.5rem, 9vw, 8rem);
+            font-weight: 700;
+            line-height: 0.95;
+            letter-spacing: -0.01em;
+            color: #fff;
+        }
+        .abangan .gold { color: var(--gold-bright); }
+        .tagline-text {
+            font-family: 'Manrope', sans-serif;
+            font-size: clamp(0.85rem, 2vw, 1.15rem);
+            font-weight: 400;
+            color: rgba(255,255,255,0.88);
+            letter-spacing: 0.02em;
+        }
+        /* Vertical gold separator (matching original design) */
+        .hero-sep {
+            width: 2px;
+            background: var(--gold-bright);
+            align-self: stretch;
+            min-height: 60px;
+            opacity: 0.8;
+            flex-shrink: 0;
+            margin-top: 8px;
+        }
+
+        /* Bottom: Countdown */
+        .bottom-area {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .countdown-eyebrow {
+            font-size: clamp(0.6rem, 1.3vw, 0.7rem);
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            font-weight: 600;
+        }
+        .countdown {
+            display: flex;
+            align-items: flex-end;
+            gap: clamp(8px, 2vw, 18px);
+        }
+        .countdown-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        .countdown-number {
+            font-size: clamp(1.8rem, 4.5vw, 3.5rem);
+            font-weight: 700;
+            font-family: 'Manrope', sans-serif;
+            color: #fff;
+            line-height: 1;
+            min-width: clamp(56px, 11vw, 88px);
+            padding: clamp(7px, 1.4vw, 13px) 0;
+            text-align: center;
+            background: rgba(0,0,0,0.35);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+        .countdown-label {
+            font-size: clamp(0.5rem, 1vw, 0.6rem);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.35);
+            font-weight: 600;
+        }
+        .countdown-sep {
+            font-size: clamp(1.2rem, 3.5vw, 2.8rem);
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: clamp(14px, 2.5vw, 25px);
+            opacity: 0.65;
+            line-height: 1;
+        }
+        .footer-line {
+            font-size: clamp(0.58rem, 1.2vw, 0.68rem);
+            color: rgba(255,255,255,0.2);
+            letter-spacing: 0.06em;
+            margin-top: 6px;
+        }
+        .footer-line a { color: rgba(180,160,0,0.45); text-decoration: none; }
+        .footer-line a:hover { color: var(--gold-bright); }
+
+        /* ── Mobile ── */
+        @media (max-width: 640px) {
+            html, body { overflow: auto; }
+            .background-scene { object-position: 70% center; } /* Shift image slightly for better mobile focal point */
+            .abangan { font-size: clamp(2.8rem, 14vw, 5rem); }
+            .countdown { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Scene -->
+    <div class="scene">
+
+        <!-- Full background image -->
+        <img src="assets/comingsoon.jpg" alt="" class="background-scene" draggable="false">
+
+        <!-- Fire layers -->
+        <div class="fire-glow"></div>
+        <div class="sparks" id="sparks"></div>
+
+        <!-- Content -->
+        <div class="content">
+
+            <!-- Logo -->
+            <img src="assets/bagani-logo-white.png" alt="Bagani Oil" class="site-logo">
+
+            <!-- Title is in the image, so we just use an empty spacer to maintain layout layout -->
+            <div class="hero-text" style="visibility: hidden; height: 100px;">
+            </div>
+
+            <!-- Countdown -->
+            <div class="bottom-area">
+                <p class="countdown-eyebrow">Launching in</p>
+                <div class="countdown">
+                    <div class="countdown-unit">
+                        <div class="countdown-number" id="days">00</div>
+                        <div class="countdown-label">Araw</div>
+                    </div>
+                    <div class="countdown-sep">:</div>
+                    <div class="countdown-unit">
+                        <div class="countdown-number" id="hours">00</div>
+                        <div class="countdown-label">Oras</div>
+                    </div>
+                    <div class="countdown-sep">:</div>
+                    <div class="countdown-unit">
+                        <div class="countdown-number" id="minutes">00</div>
+                        <div class="countdown-label">Minuto</div>
+                    </div>
+                    <div class="countdown-sep">:</div>
+                    <div class="countdown-unit">
+                        <div class="countdown-number" id="seconds">00</div>
+                        <div class="countdown-label">Segundo</div>
+                    </div>
+                </div>
+                <p class="footer-line">
+                    &copy; 2026 Bagani Oil &nbsp;&middot;&nbsp;
+                    <a href="mailto:info@bagani.com">info@bagani.com</a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // ── Generate sparks ──
+        const sparksContainer = document.getElementById('sparks');
+        const sparkCount = 38;
+        for (let i = 0; i < sparkCount; i++) {
+            const s = document.createElement('div');
+            s.className = 'spark';
+            const leftPct = Math.random() * 100;
+            const dur = (2.5 + Math.random() * 3.5).toFixed(2);
+            const delay = (Math.random() * 4).toFixed(2);
+            const drift = ((Math.random() - 0.5) * 120).toFixed(0) + 'px';
+            s.style.cssText = `left:${leftPct}%;--dur:${dur}s;--delay:${delay}s;--drift:${drift};` +
+                `width:${1 + Math.random() * 3}px;height:${1 + Math.random() * 3}px;` +
+                `background:${Math.random() > 0.5 ? '#ff7700' : '#ffcc00'};`;
+            sparksContainer.appendChild(s);
+        }
+
+        // ── Countdown ──
+        // Change this to your actual launch date
+        const launchDate = new Date("2026-04-25T16:00:00");
+
+        function pad(n) { return String(n).padStart(2, '0'); }
+
+        function tick() {
+            const diff = launchDate - new Date();
+            if (diff <= 0) {
+                ['days','hours','minutes','seconds'].forEach(id => document.getElementById(id).textContent = '00');
+                return;
+            }
+            document.getElementById('days').textContent    = pad(Math.floor(diff / 86400000));
+            document.getElementById('hours').textContent   = pad(Math.floor((diff % 86400000) / 3600000));
+            document.getElementById('minutes').textContent = pad(Math.floor((diff % 3600000) / 60000));
+            document.getElementById('seconds').textContent = pad(Math.floor((diff % 60000) / 1000));
+        }
+
+        tick();
+        setInterval(tick, 1000);
+    </script>
+</body>
+</html>
