@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="google" content="notranslate">
     <meta name="description" content="Bagani Oil — Abangan. Ang langis ng tunay na bayani">
     <title>Bagani Oil — Abangan</title>
@@ -23,6 +23,7 @@
 
         html, body {
             height: 100%;
+            height: 100dvh;
             overflow: hidden;
             font-family: 'Manrope', sans-serif;
         }
@@ -32,6 +33,7 @@
             position: relative;
             width: 100vw;
             height: 100vh;
+            height: 100dvh;
             background:
                 radial-gradient(ellipse 90% 55% at 50% 110%, #6b1a00 0%, #3a0c00 30%, transparent 65%),
                 radial-gradient(ellipse 60% 40% at 30% 115%, #8b2500 0%, transparent 55%),
@@ -234,42 +236,69 @@
 
         /* ── Mobile ── */
         @media (max-width: 768px) {
-            html, body { overflow: auto; }
-            .background-scene { object-position: 65% center; } /* Shift image slightly for better mobile focal point */
-            
-            .content { 
-                padding: 24px 20px; 
-                align-items: center; 
-                text-align: center; 
+            html, body {
+                height: 100dvh;
+                overflow: hidden;
             }
-            
-            .site-logo { margin: 0 auto; width: 140px; }
-            .hero-text { height: 40px !important; } /* Reduce spacer height on mobile */
-            
-            .bottom-area { 
-                align-items: center; 
-                width: 100%; 
+
+            .scene {
+                height: 100dvh;
             }
-            p.countdown-eyebrow { text-align: center; }
-            
-            .countdown { 
-                flex-wrap: wrap; 
-                justify-content: center; 
-                gap: 12px; 
+
+            .background-scene { object-position: 65% center; }
+
+            .content {
+                padding: 16px 20px;
+                padding-bottom: max(16px, env(safe-area-inset-bottom, 16px));
+                align-items: center;
+                text-align: center;
+                justify-content: space-between;
             }
-            
-            .countdown-number { 
-                min-width: 64px; 
-                padding: 8px 0; 
-                font-size: 2.2rem; 
+
+            .site-logo { margin: 0 auto; width: clamp(100px, 30vw, 140px); }
+
+            /* Hidden spacer — collapse it completely on mobile */
+            .hero-text { height: 0 !important; min-height: 0 !important; visibility: hidden; }
+
+            .bottom-area {
+                align-items: center;
+                width: 100%;
+                gap: 6px;
+            }
+            p.countdown-eyebrow { text-align: center; font-size: 0.6rem; }
+
+            .countdown {
+                flex-wrap: nowrap;
+                justify-content: center;
+                gap: clamp(4px, 2vw, 10px);
+            }
+
+            .countdown-number {
+                min-width: clamp(52px, 18vw, 72px);
+                padding: 6px 0;
+                font-size: clamp(1.4rem, 7vw, 2rem);
             }
 
             .countdown-sep {
-                margin-bottom: 22px; 
-                font-size: 2rem;
+                margin-bottom: clamp(6px, 2vw, 12px);
+                font-size: clamp(1rem, 5vw, 1.6rem);
             }
 
-            .footer-line { text-align: center; }
+            .countdown-label {
+                font-size: 0.5rem;
+            }
+
+            .footer-line { text-align: center; margin-top: 4px; }
+        }
+
+        /* Extra small phones */
+        @media (max-width: 380px) {
+            .countdown-number {
+                min-width: 48px;
+                font-size: 1.3rem;
+                padding: 5px 0;
+            }
+            .site-logo { width: 100px; }
         }
     </style>
 </head>
