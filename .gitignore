@@ -1,0 +1,6 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Deployment config
+windsurf_deployment.yaml
