@@ -138,6 +138,7 @@
             display: flex;
             align-items: flex-start;
             gap: 20px;
+            visibility: hidden;
         }
         .hero-copy {
             display: flex;
@@ -252,13 +253,29 @@
                 padding-bottom: max(16px, env(safe-area-inset-bottom, 16px));
                 align-items: center;
                 text-align: center;
-                justify-content: space-between;
+                justify-content: flex-start;
             }
 
             .site-logo { margin: 0 auto; width: clamp(100px, 30vw, 140px); }
 
-            /* Hidden spacer — collapse it completely on mobile */
-            .hero-text { height: 0 !important; min-height: 0 !important; visibility: hidden; }
+            /* Show hero text on mobile above countdown */
+            .hero-text {
+                visibility: visible;
+                align-self: flex-start;
+                text-align: left;
+                margin-top: auto;
+                margin-bottom: 10px;
+                width: 100%;
+                gap: 12px;
+            }
+            .hero-text .abangan {
+                font-family: 'Baskerville Old Face', Baskerville, 'Book Antiqua', 'Palatino Linotype', Georgia, serif;
+                font-size: clamp(2.4rem, 10vw, 3.5rem);
+            }
+            .hero-text .tagline-text {
+                font-family: 'Baskerville Old Face', Baskerville, 'Book Antiqua', 'Palatino Linotype', Georgia, serif;
+                font-size: clamp(0.85rem, 3.5vw, 1.1rem);
+            }
 
             .bottom-area {
                 align-items: center;
@@ -320,8 +337,13 @@
             <!-- Logo -->
             <img src="assets/bagani-logo-white.png" alt="Bagani Oil" class="site-logo">
 
-            <!-- Title is in the image, so we just use an empty spacer to maintain layout layout -->
-            <div class="hero-text" style="visibility: hidden; height: 100px;">
+            <!-- Title text: visible on mobile, hidden on desktop (text baked into background image) -->
+            <div class="hero-text">
+                <div class="hero-copy">
+                    <div class="abangan">A<span class="gold">BANG</span>AN</div>
+                    <div class="tagline-text">Ang Langis ng Tunay na Bayani</div>
+                </div>
+                <div class="hero-sep"></div>
             </div>
 
             <!-- Countdown -->
@@ -350,7 +372,7 @@
                 </div>
                 <p class="footer-line">
                     &copy; 2026 Bagani Oil &nbsp;&middot;&nbsp;
-                    <a href="mailto:baganioilph@gmail.com">baganioilph@gmail.com</a>
+                    <a href="mailto:info@baganioil.ph">info@baganioil.ph</a>
                 </p>
             </div>
 
